@@ -1,0 +1,28 @@
+{
+  "name": "apml",
+  "displayName": "Algodal Parser Machine Language",
+  "description": "Syntax highlighting for APML, the language you write APM parsers in.",
+  "version": "0.1.0",
+  "publisher": "algodal",
+  "license": "SEE LICENSE IN ../README.md",
+  "engines": { "vscode": "^1.75.0" },
+  "categories": ["Programming Languages"],
+  "keywords": ["apml", "apm", "parser", "grammar", "algodal"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "apml",
+        "aliases": ["APML", "Algodal Parser Machine Language"],
+        "extensions": [".apm", ".apml"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "apml",
+        "scopeName": "source.apml",
+        "path": "./syntaxes/apml.tmLanguage.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+# VS Code packaging output
+*.vsix
+node_modules/
