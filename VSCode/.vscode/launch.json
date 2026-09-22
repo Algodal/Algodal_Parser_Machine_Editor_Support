@@ -1,0 +1,17 @@
+{
+  // Press F5 with this folder (VSCode/) open as the workspace root. A second
+  // VS Code window starts with the APML extension loaded from source; nothing
+  // is built or installed, and your normal editor is untouched.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run APML extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}",
+        "${workspaceFolder}/examples/tour.apm"
+      ]
+    }
+  ]
+}

@@ -34,18 +34,34 @@ Open any `.apm` file. If nothing is coloured, check the language shown in the
 bottom-right of the window says **APML**; if it says Plain Text, the extension
 did not load.
 
-**While editing the grammar**, use the extension host instead, so a reload takes
-a keystroke rather than a restart:
+**While editing the grammar**, run it from source instead, so a reload takes a
+keystroke rather than a restart. That is what <kbd>F5</kbd> is for, and
+`.vscode/launch.json` in this folder already configures it.
 
-1. Open this `VSCode/` folder in VS Code.
-2. Press <kbd>F5</kbd>. A second window opens with the extension loaded.
-3. Open a `.apm` file in it.
-4. After changing a pattern, press <kbd>Ctrl</kbd>+<kbd>R</kbd> in that second
-   window to reload.
+1. Open **this `VSCode/` folder** as the workspace root -- File, Open Folder,
+   and pick `VSCode`, not the repository above it. The launch configuration
+   passes `--extensionDevelopmentPath=${workspaceFolder}`, so a workspace
+   rooted one level up points at the wrong directory and nothing loads.
+2. Press <kbd>F5</kbd>, or pick **Run APML extension** in the Run and Debug
+   panel. A second window opens, titled *[Extension Development Host]*, with
+   this extension loaded from source. Your normal editor keeps whatever APML
+   extension it already had; the two do not collide.
+3. It opens `examples/tour.apm`, a grammar that uses every construct the
+   highlighter colours. If something is the wrong colour, it shows there.
+4. Change a pattern, then press <kbd>Ctrl</kbd>+<kbd>R</kbd> in the second
+   window to reload it. Nothing is compiled or installed at any point.
+
+Nothing has to be installed first. There is no `npm install`: the extension has
+no dependencies and no code, so the extension host is the only thing running.
 
 To see which rule coloured something, run **Developer: Inspect Editor Tokens and
 Scopes** from the command palette and put the cursor on it. That shows the
 scope name, which is the fastest way to find a pattern that is matching too much.
+
+**If F5 does nothing**, the workspace root is almost always the reason. Check
+that the title bar of the second window says *Extension Development Host*, and
+that the bottom-right of a `.apm` file says **APML** rather than Plain Text.
+
 
 
 Packaging it

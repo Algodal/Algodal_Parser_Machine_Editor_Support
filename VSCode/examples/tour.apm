@@ -1,0 +1,89 @@
+# tour.apm -- a grammar written to be LOOKED at, not to be useful.
+#
+# It uses every construct the highlighter colours, so one glance says whether a
+# pattern is matching too much or not at all. Press F5, then put the cursor on
+# anything that looks wrong and run "Developer: Inspect Editor Tokens and
+# Scopes" to see which rule claimed it.
+#
+# It compiles clean:  apm examples/tour.apm -o tour.apmb
+program tour;
+
+config { "ast-node-text" : TRUE };
+
+# ---- aliases: a hex literal, a unicode literal, a number, a string ----------
+alias tab      \x09;
+alias omega    \u03A9;
+alias max      255;
+alias greeting "hello";
+
+# ---- leaves: character blocks, counters, options ----------------------------
+sp      = < \x09\e>;
+digit   = <0:9>;
+name    = <a:zA:Z_> <a:zA:Z0:9_>*;
+number  = <->? digit+ ("." digit+)?;
+text    = \x22 char::not(\x22)* \x22;
+keyword = "let" | "in" | "end" | "const" | "static" | "inline";
+
+# ---- variables: one shared texvar, one shared numvar ------------------------
+texvar mood  = "calm";
+numvar width = 4;
+
+# ---- a scope, and a semvar emptied when the scope closes --------------------
+scope block
+    begin = "{";
+    end   = "}";
+
+semvar declared {"scope": block};
+
+# ---- a body written in C by the host ----------------------------------------
+tab_stop = _;
+
+foreign { tab_stop: "host_tab_stop" };
+
+# ---- a permutation: each member once, in any order --------------------------
+modifiers := perm["const" "static" "inline"];
+
+# ---- an expression, by precedence, folded by an AST map ---------------------
+bindpow ops {
+    "+" : (10, 11) ;
+    "-" : (10, 11) ;
+    "*" : (20, 21) ;
+    "/" : (20, 21) ;
+}
+
+group := ("(" . expr . ")") -> (expr);
+atom  := number | name | text | group;
+
+feat {"bind": ops} expr :=
+    ( atom
+    | 'l'expr . "+" . 'r'expr
+    | 'l'expr . "-" . 'r'expr
+    | 'l'expr . "*" . 'r'expr
+    | 'l'expr . "/" . 'r'expr )
+    -> ( [atom]
+       | "+" : ('l' 'r')
+       | "-" : ('l' 'r')
+       | "*" : ('l' 'r')
+       | "/" : ('l' 'r') ) ;
+
+# ---- a capture into a semvar, and a set question ----------------------------
+declare := ((modifiers .)? . (name::not(keyword) => declared) . ":" . expr)
+        -> (modifiers name expr);
+
+use     := name::is(declared);
+
+# ---- a logic block deciding between two grammars ----------------------------
+guarded := if ({ width > 0 AND NOT mood == "panic" }) [ declare | use ];
+
+# ---- give: repetition whose boundaries the cache can reuse ------------------
+body := give[guarded+ use];
+
+# ---- node_id: what this action is SAVED as ----------------------------------
+node_id { body: "statements" };
+
+# ---- a final block: the last word on whether this rule matched --------------
+statement := (block::begin . tab_stop . body . block::end) -> (body);
+checked   := statement . {{ width > 0 }};
+
+parser { checked . nl?; }
+. { sp, nl }

@@ -1,0 +1,4 @@
+{
+  // Not required. It only helps when writing the grammar file itself.
+  "recommendations": ["vscode-samples.vscode-tmgrammar-test"]
+}
