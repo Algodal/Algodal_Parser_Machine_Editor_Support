@@ -27,14 +27,14 @@ syn match   apmlLabel       "'[A-Za-z0-9_]\+'"
 
 " ---- words ------------------------------------------------------------------
 syn keyword apmlKeyword     program link parser config feat bindpow foreign
-syn keyword apmlKeyword     node_id alias perm give if node
+syn keyword apmlKeyword     node_id alias perm if node
 syn keyword apmlType        texvar numvar semvar scope
 syn keyword apmlBuiltin     spc nl eol eof char error
 syn keyword apmlLogic       AND OR NOT
 syn keyword apmlBoolean     TRUE FALSE
 
 " ---- called after `::` ------------------------------------------------------
-syn match   apmlCall        "::\%(order\|oneof\|icase\|is\|not\|subkind\|part\|char_count\|to_num\|iter_steps\|first\|begin\|end\|clear\)\>"
+syn match   apmlCall        "::\%(order\|oneof\|icase\|is\|not\|subkind\|part\|char_count\|to_num\|iter_steps\|until\|first\|begin\|end\|clear\)\>"
 syn match   apmlNamespace   "\<tex\%(::\)\@="
 " binding to a precedence table at the call site: bp::-expr
 syn match   apmlCall        "::-[A-Za-z_]\w*"
@@ -46,7 +46,7 @@ syn match   apmlDefine      "^\s*[A-Za-z_]\w*\s*\ze\%(:=\|=[^=]\)"
 syn match   apmlForeign     "\%(\w\)\@<!_\%(\w\)\@!"
 
 " ---- operators. `.` between units is the inbetween skip, not punctuation ----
-syn match   apmlOperator    ":=\|->\|=>\|::\|[=|/+*?:.!-]"
+syn match   apmlOperator    ":=\|->\|=>\|::\|[=|/+*?:.!^-]"
 
 hi def link apmlComment     Comment
 hi def link apmlString      String

@@ -82,13 +82,13 @@ colours, so it follows whatever scheme you already use:
 
 | APML | standard group |
 |---|---|
-| `program`, `parser`, `if`, `perm`, `give` | `Statement` |
+| `program`, `parser`, `if`, `perm` | `Statement` |
 | `texvar`, `numvar`, `semvar`, `scope` | `Type` |
 | `spc`, `nl`, `char`, `error` | `Function` |
 | a character block `<a:z>` | `Constant` |
 | a map label `'l'` | `Identifier` |
 | `_`, a body written in C | `Special` |
-| `:=`, `->`, `=>`, `::`, `.` | `Operator` |
+| `:=`, `->`, `=>`, `::`, `.`, `^` | `Operator` |
 
 `.` is highlighted as an operator on purpose. Between units it is the inbetween
 skip, not punctuation, and a reader scanning a grammar needs to see it.

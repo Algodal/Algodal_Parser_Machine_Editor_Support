@@ -57,7 +57,7 @@
     },
     "call": {
       "comment": "a result function, or a semvar or scope call",
-      "match": "(::)(order|oneof|icase|is|not|subkind|part|char_count|to_num|iter_steps|first|begin|end|clear)\\b",
+      "match": "(::)(order|oneof|icase|is|not|subkind|part|char_count|to_num|iter_steps|until|first|begin|end|clear)\\b",
       "captures": {
         "1": { "name": "keyword.operator.apml" },
         "2": { "name": "support.function.apml" }
@@ -86,7 +86,7 @@
     },
     "keyword": {
       "name": "keyword.control.apml",
-      "match": "\\b(program|link|parser|config|feat|bindpow|foreign|node_id|alias|perm|give|if|node)\\b"
+      "match": "\\b(program|link|parser|config|feat|bindpow|foreign|node_id|alias|perm|if|node)\\b"
     },
     "type": {
       "name": "storage.type.apml",

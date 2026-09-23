@@ -75,15 +75,20 @@ use     := name::is(declared);
 # ---- a logic block deciding between two grammars ----------------------------
 guarded := if ({ width > 0 AND NOT mood == "panic" }) [ declare | use ];
 
-# ---- give: repetition whose boundaries the cache can reuse ------------------
-body := give[guarded+ use];
+# ---- a counter that stops at something --------------------------------------
+# `::until` keeps the terminator; the `^` glue (read "Less") leaves it for the
+# unit after. Both take a counter that could stop early.
+body  := (guarded+ ^ use);
 
 # ---- node_id: what this action is SAVED as ----------------------------------
 node_id { body: "statements" };
 
 # ---- a final block: the last word on whether this rule matched --------------
 statement := (block::begin . tab_stop . body . block::end) -> (body);
-checked   := statement . {{ width > 0 }};
+
+# ...and the other spelling, which keeps what it stopped at
+trailer   := (name . char*::until(";"));
+checked   := (statement | trailer) . {{ width > 0 }};
 
 parser { checked . nl?; }
 . { sp, nl }
