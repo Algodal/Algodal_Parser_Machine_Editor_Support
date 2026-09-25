@@ -1,5 +1,5 @@
-Algodal Parser Machine — Editor Support
-=======================================
+Algodal Parser Machine Editor Support
+=====================================
 
 Editor support for the **Algodal Parser Machine Language (APML)**, the language
 you write parsers in. Syntax highlighting that helps an editor read a `.apm` or `.apml`.
