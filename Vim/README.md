@@ -73,31 +73,3 @@ That prints the syntax group, which is the fastest way to find a pattern that is
 matching more than it should. Vim's own `:syntax` lists every group currently
 defined.
 
-
-How the colours are chosen
---------------------------
-
-The file links each group to a **standard highlight group** rather than naming
-colours, so it follows whatever scheme you already use:
-
-| APML | standard group |
-|---|---|
-| `program`, `parser`, `if`, `perm` | `Statement` |
-| `texvar`, `numvar`, `semvar`, `scope` | `Type` |
-| `spc`, `nl`, `char`, `error` | `Function` |
-| a character block `<a:z>` | `Constant` |
-| a map label `'l'` | `Identifier` |
-| `_`, a body written in C | `Special` |
-| `:=`, `->`, `=>`, `::`, `.`, `^` | `Operator` |
-
-`.` is highlighted as an operator on purpose. Between units it is the inbetween
-skip, not punctuation, and a reader scanning a grammar needs to see it.
-
-
-Keeping it honest
------------------
-
-The word lists are APML's reserved words. When the language gains one, it has to
-be added in three places: the language's own grammar, the manual's Keywords
-chapter, and this file. A word missing here is not an error anywhere, it simply
-stops being coloured.
