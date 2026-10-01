@@ -49,7 +49,7 @@ bindpow ops {
     "-" : (10, 11) ;
     "*" : (20, 21) ;
     "/" : (20, 21) ;
-}
+};
 
 group := ("(" . expr . ")") -> (expr);
 atom  := number | name | text | group;
@@ -90,5 +90,5 @@ statement := (block::begin . tab_stop . body . block::end) -> (body);
 trailer   := (name . char*::until(";"));
 checked   := (statement | trailer) . {{ width > 0 }};
 
-parser { checked . nl?; }
-. { sp, nl }
+parser { checked . nl?; };
+. { sp, nl };
