@@ -27,7 +27,7 @@ syn match   apmlLabel       "'[A-Za-z0-9_]\+'"
 
 " ---- words ------------------------------------------------------------------
 syn keyword apmlKeyword     program link parser config feat bindpow foreign
-syn keyword apmlKeyword     node_id alias perm if node
+syn keyword apmlKeyword     node_id alias perm if node try
 syn keyword apmlType        texvar numvar semvar scope
 syn keyword apmlBuiltin     spc nl eol eof char error
 syn keyword apmlLogic       AND OR NOT

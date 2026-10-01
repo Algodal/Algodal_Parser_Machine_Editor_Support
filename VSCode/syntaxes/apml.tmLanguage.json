@@ -86,7 +86,7 @@
     },
     "keyword": {
       "name": "keyword.control.apml",
-      "match": "\\b(program|link|parser|config|feat|bindpow|foreign|node_id|alias|perm|if|node)\\b"
+      "match": "\\b(program|link|parser|config|feat|bindpow|foreign|node_id|alias|perm|if|node|try)\\b"
     },
     "type": {
       "name": "storage.type.apml",
@@ -112,7 +112,7 @@
     "operator": {
       "comment": "`.` is the inbetween skip, not punctuation",
       "name": "keyword.operator.apml",
-      "match": ":=|->|=>|::|[=|/+*?:.\\-!]"
+      "match": ":=|->|=>|::|[=|/+*?:.\\-!^]"
     }
   }
 }
